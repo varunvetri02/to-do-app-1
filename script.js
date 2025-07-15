@@ -1,29 +1,16 @@
 function toggleMenu() {
-  const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("active");
+document.getElementById("sidebar").classList.toggle("active");
 }
-
+//sidebar function
 window.onload = function () {
   loadTasks();
-
-  const menuLinks = document.querySelectorAll("#sidebar a");
-  menuLinks.forEach(link => {
-    link.addEventListener("click", () => {
-      document.getElementById("sidebar").classList.remove("active");
-    });
+document.getElementById("taskInput").addEventListener("input", () => {
+    const input = document.getElementById("taskInput");
+    const errorDiv = document.getElementById("inputError");
+    input.classList.remove("input-error");
+    errorDiv.innerText = "";
   });
 };
-
-document.addEventListener("click", function (event) {
-  const sidebar = document.getElementById("sidebar");
-  const hamburger = document.querySelector(".hamburger");
-  const isInsideSidebar = sidebar.contains(event.target);
-  const isHamburgerClick = hamburger.contains(event.target);
-
-  if (!isInsideSidebar && !isHamburgerClick) {
-    sidebar.classList.remove("active");
-  }
-});
 
 function saveTasks() {
   const tasks = [];
@@ -39,57 +26,93 @@ function loadTasks() {
     createTask(taskText);
   });
 }
+// add task 
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const errorDiv = document.getElementById("inputError");
+  const taskText = input.value.trim();
 
+  if (taskText === "") {
+    input.classList.add("input-error");
+    errorDiv.innerText = "⚠️ Please enter a task.";
+    return;
+  }
+
+  createTask(taskText);
+  saveTasks();
+  input.value = "";
+  input.classList.remove("input-error");
+  errorDiv.innerText = "";
+}
+
+//create task
 function createTask(taskText) {
   const taskDiv = document.createElement("div");
   taskDiv.className = "task";
 
+  const contentDiv = document.createElement("div");
+  contentDiv.className = "task-content";
+
+
   let taskSpan = document.createElement("span");
   taskSpan.innerText = taskText;
 
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.className = "task-buttons";
+
   const editBtn = document.createElement("button");
   editBtn.innerText = "Edit";
+
+    const deleteBtn = document.createElement("button");
+  deleteBtn.innerText = "Delete";
+
+  const inputError = document.createElement("div");
+  inputError.className = "error-message";
 
   editBtn.onclick = function () {
     if (editBtn.innerText === "Edit") {
       const editInput = document.createElement("input");
       editInput.type = "text";
       editInput.value = taskSpan.innerText;
-      taskDiv.replaceChild(editInput, taskSpan);
+      contentDiv.replaceChild(editInput, taskSpan);
       editBtn.innerText = "Save";
       taskSpan = editInput;
+
+    editInput.addEventListener("input", () => {
+        editInput.classList.remove("input-error");
+        inputError.innerText = "";
+    });
     } else {
+      const newText = taskSpan.value.trim();
+       if (newText === "") {
+        taskSpan.classList.add("input-error");
+        inputError.innerText = "⚠️ Task cannot be empty!";
+        return;
+     }
       const newSpan = document.createElement("span");
-      newSpan.innerText = taskSpan.value;
-      taskDiv.replaceChild(newSpan, taskSpan);
+      newSpan.innerText = newText;
+      contentDiv.replaceChild(newSpan, taskSpan);
       editBtn.innerText = "Edit";
       taskSpan = newSpan;
+      inputError.innerText = "";
       saveTasks();
     }
   };
 
-  const deleteBtn = document.createElement("button");
-  deleteBtn.innerText = "Delete";
-  deleteBtn.onclick = function () {
+   deleteBtn.onclick = function () {
     taskDiv.remove();
     saveTasks();
   };
+  buttonsDiv.appendChild(editBtn);
+  buttonsDiv.appendChild(deleteBtn);
 
-  taskDiv.appendChild(taskSpan);
-  taskDiv.appendChild(editBtn);
-  taskDiv.appendChild(deleteBtn);
+  contentDiv.appendChild(taskSpan);
+  contentDiv.appendChild(buttonsDiv);
+
+  taskDiv.appendChild(contentDiv);
+  taskDiv.appendChild(inputError);
+
 
   document.getElementById("taskList").appendChild(taskDiv);
 }
-
-function addTask() {
-  const input = document.getElementById("taskInput");
-  const taskText = input.value.trim();
-  if (taskText === "") return;
-
-  createTask(taskText);
-  saveTasks();
-  input.value = "";
-}
-
-
+ 

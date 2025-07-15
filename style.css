@@ -5,16 +5,80 @@
 }
 
 body {
-  background-image: url();
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background: white;
   font-family: Arial, sans-serif;
   color: #fff;
   min-height: 100vh;
   position: relative;
   padding-bottom: 60px;
 }
+.title-section {
+  text-align: center;
+  padding: 30px 20px 15px;
+  font-size: 36px;
+  font-weight: bold;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+}
+.task-section {
+  background-color:  rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  margin: 20px auto 50px;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+.input-group {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
+}
+
+
+input[type="text"] {
+  padding: 10px;
+  width: 70%;
+  max-width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border border-box;
+}
+.main-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+button:hover,
+.main-button:hover {
+  background-color: #555;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+
+.input-error {
+  border: 2px solid red;
+  box-shadow: 0 0 4px red;
+}
+#taskList {
+  margin-top: 20px;
+   text-align: left;
+}
+
 
 .hamburger {
   position: fixed;
@@ -97,6 +161,23 @@ button {
   color: white;
   cursor: pointer;
 }
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+  justify-content: flex-start;
+
+}
+.input-error {
+  border: 2px solid red;
+  box-shadow: 0 0 4px red;
+}
+.task button {
+  background-color: #333;
+}
+ 
 
 #taskList {
   margin-top: 20px;
@@ -106,34 +187,35 @@ button {
 .task {
   background: rgba(255, 255, 255, 0.1);
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  margin-bottom: 12px;
+  border-radius: 8px;
   display: flex;
+flex-direction: column;
+}
+.task-content {
+  display: flex;
+  gap: 10px;
   justify-content: space-between;
   align-items: center;
+   flex-wrap: wrap;
 }
-
-.task span,
+.task-buttons button {
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.task-buttons button:hover {
+  background-color: #555;
+}
 .task input[type="text"] {
   flex: 1;
-  margin-right: 10px;
-  color: white;
-}
-
-.task input[type="text"] {
-  background: transparent;
+  padding: 6px;
   border: 1px solid #ccc;
-  color: white;
-  padding: 5px;
   border-radius: 4px;
 }
-
-.task button {
-  background-color: #666;
-  padding: 6px 10px;
-  font-size: 14px;
-}
-
 footer {
   position: absolute;
   bottom: 0;
@@ -145,3 +227,4 @@ footer {
   line-height: 50px;
   font-size: 14px;
 }
+

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>To Do App</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+  
   <div class="hamburger" onclick="toggleMenu()">
     <div></div>
     <div></div>
     <div></div>
   </div>
 
+  
   <div id="sidebar" class="sidebar">
     <h3>Menu</h3>
     <a href="#">Home</a>
@@ -23,17 +23,22 @@
     <a href="#">Business</a>
   </div>
 
+  
   <div class="title-section">To Do</div>
 
+  
   <div class="task-section">
+    <div class ="input-group">
     <input type="text" id="taskInput" placeholder="Enter your task">
-    <button onclick="addTask()">Enter</button>
+    <button onclick="addTask()" class="main-button">Enter</button>
+  </div>
+     <div id="inputError" class="error-message"></div>
     <div id="taskList"></div>
   </div>
 
+   
   <footer>© 2025 All rights reserved.</footer>
 
   <script src="script.js"></script>
 </body>
-
 </html>
